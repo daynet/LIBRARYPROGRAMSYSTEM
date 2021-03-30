@@ -1,0 +1,485 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters.master" AutoEventWireup="true"
+    CodeFile="PolicySetUp.aspx.cs" Inherits="Pages_PolicySetUp" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+    <div id="all-form-wrap">
+        <!--Div Started to Wrapping all Forms Fields-->
+        <div class="form-fieldset-wrapper">
+            <!--Start Div To Wrapping Form Fields Set-->
+            <div class="form-fieldset-wrapper-top">
+                <!--Div for the form fieldset wrapper top rounded part-->
+                <h2>
+                    Policy SetUp</h2>
+            </div>
+            <!--ended Div of Form fieldset wrapper top rounded part-->
+            <div class="form-fieldset-wrapper-mid">
+                <!--Div for the form fieldset wrapper middle part for the left and right border-->
+                <div class="form-fieldset-wrapper-mid-inner9">
+                    <!--Form fieldset wrapper mid inner inside this Div all form fields inserted here-->
+                    <table border="0" cellpadding="2" cellspacing="0">
+                        <tr>
+                            <td width="25%">
+                                Academic Year Wise
+                            </td>
+                            <td width="25%">
+                                <asp:RadioButton ID="chkYear" Checked="true" GroupName="Year" runat="server" AutoPostBack="true"
+                                    OnCheckedChanged="chkYear_CheckedChanged" />
+                            </td>
+                            <td width="25%">
+                                Date Wise
+                            </td>
+                            <td width="25%">
+                                <asp:RadioButton ID="chkDate" runat="server" GroupName="Year" AutoPostBack="true"
+                                    OnCheckedChanged="chkDate_CheckedChanged" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="25%">
+                                Type
+                            </td>
+                            <td width="25%">
+                                <asp:DropDownList ID="drpType" runat="server" AutoPostBack="true" CssClass="textBox11"
+                                    OnSelectedIndexChanged="drpType_SelectedIndexChanged">
+                                    <asp:ListItem Text="Benefit" Value="B"></asp:ListItem>
+                                    <asp:ListItem Text="Leave" Value="L"></asp:ListItem>
+                                </asp:DropDownList>
+                            </td>
+                            <td id="tdYear1" runat="server" width="25%">
+                                <asp:HiddenField ID="hdId" runat="server" />
+                                Academic Year
+                            </td>
+                            <td id="tdYear2" runat="server" width="25%">
+                                <asp:DropDownList ID="drpAcd" runat="server" CssClass="textBox11">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr id="trDate" runat="server" visible="false">
+                            <td>
+                                Effective From
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtEffectiveFrom" runat="server" CssClass="textBox1"></asp:TextBox>
+                                <cc1:CalendarExtender ID="cc1" runat="server" CssClass="MyCalendar" TargetControlID="txtEffectiveFrom"
+                                    Format="dd/MM/yyyy">
+                                </cc1:CalendarExtender>
+                            </td>
+                            <td>
+                                Effective Till
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtTill" runat="server" CssClass="textBox1"></asp:TextBox>
+                                <cc1:CalendarExtender ID="cc2" runat="server" CssClass="MyCalendar" TargetControlID="txtTill"
+                                    Format="dd/MM/yyyy">
+                                </cc1:CalendarExtender>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                Department
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="lstDept" runat="server" CssClass="textBox11">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                                Type SubCategory
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="drpSubCat" runat="server" AutoPostBack="true" CssClass="textBox11"
+                                    OnSelectedIndexChanged="drpSubCat_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Designation
+                            </td>
+                            <td>
+                                <asp:ListBox ID="drpDesg" Height="60" SelectionMode="Multiple" runat="server" CssClass="textBox11">
+                                </asp:ListBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="trFamily">
+                            <td>
+                                <asp:Label runat="server" Text="Is Family"></asp:Label>&nbsp;
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="chkFamily" runat="server" AutoPostBack="true" OnCheckedChanged="chkFamily_CheckedChanged" />
+                                &nbsp;
+                            </td>
+                            <td>
+                                Frequency
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="drpFrequesncy" CssClass="textBox11" runat="server">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="trLeave">
+                            <td>
+                                Min Value
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TxtMin" runat="server" Text="0" CssClass="textBox1"></asp:TextBox>
+                            </td>
+                            <td>
+                                Max Value
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TxtMax" runat="server" Text="0" CssClass="textBox1"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="trBenifit">
+                            <td>
+                                No Of Children can avail
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtchildren" runat="server" Text="0" CssClass="textBox1"></asp:TextBox>
+                            </td>
+                            <td>
+                                Age Limit
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtAge" runat="server" Text="0" CssClass="textBox1"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Is Finance
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="chkFinace" runat="server" />
+                            </td>
+                            <td>
+                                <asp:Label ID="Label1" runat="server" Text="Within UAE"></asp:Label>&nbsp;
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="chkWithUAE" runat="server" AutoPostBack="true" />
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Fee Group
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="drpGroup" runat="server" CssClass="textBox11">
+                                </asp:DropDownList>
+                            </td>
+                            <td>
+                                Grade
+                            </td>
+                            <td>
+                                <asp:DropDownList ID="drpGrade" runat="server" CssClass="textBox11">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="trsem1" visible="false">
+                            <td>
+                                Seminar Type
+                            </td>
+                            <td>
+                                LOCAL(UAE-WITHOUT OVER NIGHT STAY)
+                            </td>
+                            <td>
+                                Maximum of Dhs
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtMaxDhs" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="trsem2" visible="false">
+                            <td>
+                                Participation Fees
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtpartFees" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                Per Diem allowance max upto 3 days
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtperday" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="tr1" visible="false">
+                            <td>
+                                Seminar Type
+                            </td>
+                            <td>
+                                LOCAL(UAE)
+                            </td>
+                            <td>
+                                Maximum of Dhs
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox1" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="tr2" visible="false">
+                            <td>
+                                Participation Fees
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox2" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                Per Diem allowance max upto 3 days
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox3" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="tr3" visible="false">
+                            <td>
+                                Seminar Type
+                            </td>
+                            <td>
+                                REGIONAL (GCC COUNTRIES)
+                            </td>
+                            <td>
+                                Maximum of Dhs
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox4" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="tr4" visible="false">
+                            <td>
+                                Participation Fees
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox5" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                Per Diem allowance max upto 3 days
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox6" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="tr5" visible="false">
+                            <td>
+                                Seminar Type
+                            </td>
+                            <td>
+                                INTERNATIONAL
+                            </td>
+                            <td>
+                                Maximum of Dhs
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox7" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr runat="server" id="tr6" visible="false">
+                            <td>
+                                Participation Fees
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox8" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                            <td>
+                                Per Diem allowance max upto 3 days
+                            </td>
+                            <td>
+                                <asp:TextBox ID="TextBox9" Text="0" CssClass="textBox1" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Remarks
+                            </td>
+                            <td colspan="3">
+                                <asp:TextBox ID="txtRemarks" Width="480px" TextMode="MultiLine" Rows="5" runat="server"
+                                    CssClass="textBox11"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <asp:Button ID="btnUpdate" runat="server" Text="Save" OnClientClick="javascript: return confirm('Do you want to save?')"
+                                    OnClick="btnUpdate_Click" />
+                                <asp:Button ID="btnAddNew" runat="server" Text="Clear" OnClick="btnAddNew_Click" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td colspan="3">
+                                <asp:Label ID="lblmsg" runat="server"></asp:Label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!--form fieldset wrapper mid inner ended-->
+            </div>
+            <!--Ended Div of form fieldset wrapper middle part of left and right border-->
+            <div class="form-fieldset-wrapper-bottom">
+            </div>
+            <!--Div started for the form fieldset wrapper bottom founded-->
+        </div>
+        <!--ended Div of Wrapping Form Fields Set-->
+    </div>
+    <div id="all-form-wrap">
+        <div class="form-fieldset-wrapper">
+            <!--Start Div To Wrapping Form Fields Set-->
+            <div class="form-fieldset-wrapper-top">
+                <!--Div for the form fieldset wrapper top rounded part-->
+                <h2>
+                    Policy List (Benefits)
+                </h2>
+            </div>
+            <!--ended Div of Form fieldset wrapper top rounded part-->
+            <div class="form-fieldset-wrapper-mid">
+                <!--Div for the form fieldset wrapper middle part for the left and right border-->
+                <div class="form-fieldset-wrapper-mid-inner">
+                    <!--start list member blocks-->
+                    <div align="center">
+                        <asp:GridView ID="GridBenefits" AutoGenerateColumns="false" GridLines="Both" runat="server"
+                            Style="margin-left: 5px; margin-bottom: 10px" Width="60%" OnRowCommand="txtMultilineBanks_RowCommand"
+                            OnRowDataBound="GridBenefits_RowDataBound">
+                            <RowStyle CssClass="GridItem" />
+                            <HeaderStyle CssClass="GridHeader" />
+                            <PagerStyle CssClass="grid-pagination" HorizontalAlign="Right" />
+                            <SelectedRowStyle CssClass="GridRowOver" />
+                            <EditRowStyle />
+                            <AlternatingRowStyle CssClass="GridAltItem" />
+                            <Columns>
+                                <asp:TemplateField HeaderText="Academic Year">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbbnkCode" runat="server"><%#Eval("FNAME")%></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Type">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbbnkName" runat="server"><%#Eval("BenefitName")%></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Designation">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbBranchName" runat="server"><%#Eval("JOB_NAME")%></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Family">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbcontName" runat="server"><%#Eval("IsFamily") %></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Frequency">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbmblName" runat="server"><%#Eval("Benefitfrequency")%></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="No Of Children">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbagentName" runat="server"><%#Eval("NoOfChildren") %></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Age Limit">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblage" runat="server"><%#Eval("Age") %></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Action">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblActive" runat="server" Visible="false" Text='<%#Eval("IsActive") %>'></asp:Label>
+                                        <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Activate" OnClientClick="javascript: return confirm('Are you sure you want to activate this policy?')"
+                                            CommandArgument='<%#Eval("pid")%>' Text="Activate"></asp:LinkButton>
+                                            <asp:LinkButton ID="EditLnk" runat="server" CommandName="EditPol" OnClientClick="javascript: return confirm('Are you sure you want to edit this policy?')"
+                                            CommandArgument='<%#Eval("pid")%>' Text="Activate"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" OnClientClick="javascript: return confirm('Are you sure you want to delete this policy?')"
+                                            CommandArgument='<%#Eval("pid")%>' Text="Delete"></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                </div>
+                <!--form fieldset wrapper mid inner ended-->
+            </div>
+            <!--Ended Div of form fieldset wrapper middle part of left and right border-->
+            <div class="form-fieldset-wrapper-bottom">
+            </div>
+            <!--Div started for the form fieldset wrapper bottom founded-->
+        </div>
+        <!--ended Div of Wrapping Form Fields Set-->
+    </div>
+    <div id="all-form-wrap">
+        <div class="form-fieldset-wrapper">
+            <!--Start Div To Wrapping Form Fields Set-->
+            <div class="form-fieldset-wrapper-top">
+                <!--Div for the form fieldset wrapper top rounded part-->
+                <h2>
+                    Policy List (Leaves)
+                </h2>
+            </div>
+            <!--ended Div of Form fieldset wrapper top rounded part-->
+            <div class="form-fieldset-wrapper-mid">
+                <!--Div for the form fieldset wrapper middle part for the left and right border-->
+                <div class="form-fieldset-wrapper-mid-inner">
+                    <!--start list member blocks-->
+                    <div align="center">
+                        <asp:GridView ID="GridLeaves" AutoGenerateColumns="false" GridLines="Both" runat="server"
+                            Style="margin-left: 5px; margin-bottom: 10px" Width="60%" OnRowDataBound="GridBenefits_RowDataBound"
+                            OnRowCommand="txtMultilineBanks_RowCommand">
+                            <RowStyle CssClass="GridItem" />
+                            <HeaderStyle CssClass="GridHeader" />
+                            <PagerStyle CssClass="grid-pagination" HorizontalAlign="Right" />
+                            <SelectedRowStyle CssClass="GridRowOver" />
+                            <EditRowStyle />
+                            <AlternatingRowStyle CssClass="GridAltItem" />
+                            <Columns>
+                                <asp:TemplateField HeaderText="Academic Year">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbbnkCode" runat="server"><%#Eval("FNAME")%></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Type">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbbnkName" runat="server"><%#Eval("leavetype")%></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Designation">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbBranchName" runat="server"><%#Eval("JOB_NAME")%></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Finance">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbcontName" runat="server"><%#Eval("IsFinance") %></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="No of Leaves">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lbmblName" runat="server"><%#Eval("MaxValue")%></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Action">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblActive" runat="server" Visible="false" Text='<%#Eval("IsActive") %>'></asp:Label>
+                                        <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Activate" OnClientClick="javascript: return confirm('Are you sure you want to activate this policy?')"
+                                            CommandArgument='<%#Eval("pid")%>' Text="Activate"></asp:LinkButton>
+                                        <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" OnClientClick="javascript: return confirm('Are you sure you want to delete this policy?')"
+                                            CommandArgument='<%#Eval("pid")%>' Text="Delete"></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                        </asp:GridView>
+                    </div>
+                </div>
+                <!--form fieldset wrapper mid inner ended-->
+            </div>
+            <!--Ended Div of form fieldset wrapper middle part of left and right border-->
+            <div class="form-fieldset-wrapper-bottom">
+            </div>
+            <!--Div started for the form fieldset wrapper bottom founded-->
+        </div>
+        <!--ended Div of Wrapping Form Fields Set-->
+    </div>
+</asp:Content>
